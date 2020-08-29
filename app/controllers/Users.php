@@ -28,31 +28,31 @@ class Users extends Controller
 
             //Validate email
             if(empty($data['email'])) {
-                $data['email_err'] = 'Please enter email';    
+                $data['email_err'] = 'Por favor insira seu email';    
             } else {
                 if($this->userModel->findUserByEmail($data['email'])) {
-                    $data['email_err'] = 'Email is already taken';
+                    $data['email_err'] = 'Este email já está em uso';
                 }
             }
 
             //Validate name
             if(empty($data['name'])) {
-                $data['name_err'] = 'Please enter name';    
+                $data['name_err'] = 'Por favor inserir nome';    
             }
 
             //Validate password
             if(empty($data['password'])) {
-                $data['password_err'] = 'Please enter password';    
+                $data['password_err'] = 'Por favor inserir senha';    
             } elseif(strlen($data['password']) < 6) {
-                $data['password_err'] = 'Password must be at least 6 characters'; 
+                $data['password_err'] = 'Sua senha deve conter pelo menos 6 caracteres'; 
             }
 
             //Validate confim password
             if(empty($data['confirm_password'])) {
-                $data['confirm_password_err'] = 'Please confirm password';    
+                $data['confirm_password_err'] = 'Por favor confimar senha';    
             } else {
                 if($data['password'] != $data['confirm_password']) {
-                    $data['confirm_password_err'] = 'Password do not match';
+                    $data['confirm_password_err'] = 'Senhas não coincidem';
                 }
             }
 
@@ -65,10 +65,10 @@ class Users extends Controller
 
                 //Register User
                 if($this->userModel->register($data)) {
-                    flash('register_success', 'You are registred and can log in now.');
+                    flash('register_success', 'Você está registrado e pode fazer login agora.');
                     redirect('users/login');
                 } else {
-                    die('Something went wrong');
+                    die('Algo deu errado');
                 }
 
             } else {
@@ -113,12 +113,12 @@ class Users extends Controller
 
             //Validate email
             if(empty($data['email'])) {
-                $data['email_err'] = 'Please enter email';    
+                $data['email_err'] = 'Por favor inserir email';    
             }
 
             //Validate password
             if(empty($data['password'])) {
-                $data['password_err'] = 'Please enter password';    
+                $data['password_err'] = 'Por favor inserir senha';    
             }
 
             //Check for user/email
@@ -131,7 +131,7 @@ class Users extends Controller
                     //Create Session
                     $this->createUserSession($loggedInUser);
                 } else {
-                    $data['password_err'] = 'Password incorrect';
+                    $data['password_err'] = 'Senha incorreta';
 
                     $this->view('users/login', $data);
                 }
