@@ -36,22 +36,22 @@ class Posts extends Controller
 
             //Validate title
             if(empty($data['title'])) {
-                $data['title_err'] = 'Plese enter title';
+                $data['title_err'] = 'Por favor inserir titulo';
             }
 
             //Validate body
             if(empty($data['body'])) {
-                $data['body_err'] = 'Plese enter body';
+                $data['body_err'] = 'Por favor inserir corpo';
             }
 
             //Make sure no errors
             if(empty($data['title_err']) && empty($data['body_err'])) {
                 //Validated
                 if($this->postModel->addPost($data)) {
-                    flash('post_added', 'Post Added');
+                    flash('post_added', 'Post adicionado com sucesso');
                     redirect('posts');
                 } else {
-                    die('Something went wrong');
+                    die('Algo deu errado');
                 }
             } else {
                 $this->view('posts/add', $data);
